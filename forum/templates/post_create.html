@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Новый пост{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex align-items-center">
+                <i class="bi bi-plus-circle me-2"></i>
+                <h2 class="h5 mb-0">Создать пост</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Заголовок -->
+                    <div class="mb-3">
+                        <label for="id_title" class="form-label">Заголовок</label>
+                        <input 
+                            type="text" 
+                            name="title" 
+                            class="form-control" 
+                            id="id_title"
+                            placeholder="Краткий и ёмкий заголовок"
+                            required
+                        >
+                    </div>
+
+                    <!-- Текст -->
+                    <div class="mb-3">
+                        <label for="id_content" class="form-label">Содержание</label>
+                        <textarea 
+                            name="content" 
+                            class="form-control" 
+                            id="id_content"
+                            rows="6" 
+                            placeholder="Расскажите подробнее..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- Приватность -->
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                name="is_private" 
+                                id="id_is_private"
+                            >
+                            <label class="form-check-label" for="id_is_private">
+                                <i class="bi bi-lock me-1"></i>Только для зарегистрированных пользователей
+                            </label>
+                        </div>
+                        <div class="form-text text-muted small">
+                            Приватные посты видны только авторизованным пользователям.
+                        </div>
+                    </div>
+
+                    <!-- Файл -->
+                    <div class="mb-4">
+                        <label for="id_file" class="form-label">
+                            <i class="bi bi-paperclip me-1"></i>Прикрепить файл (необязательно)
+                        </label>
+                        <input type="file" name="file" class="form-control" id="id_file">
+                        <div class="form-text text-muted small">
+                            Поддерживаются изображения (jpg, png, gif) и документы.
+                        </div>
+                    </div>
+
+                    <!-- Кнопки -->
+                    <div class="d-grid gap-2 d-md-block">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-send-check me-1"></i>Опубликовать
+                        </button>
+                        <a href="{% url 'post_list' %}" class="btn btn-outline-secondary mt-2 mt-md-0">
+                            <i class="bi bi-arrow-left me-1"></i>Отмена
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

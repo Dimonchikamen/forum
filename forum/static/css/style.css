@@ -1,0 +1,82 @@
+body {
+    background-color: #f8f9fa;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+            Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.forum-header {
+    background: linear-gradient(135deg, #4361ee, #3a0ca3);
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.forum-header h1 {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.forum-header .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.forum-header .nav-link,
+.forum-header .navbar-text {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.forum-header .nav-link:hover,
+.forum-header .navbar-text:hover {
+    color: white !important;
+}
+
+.btn-primary {
+    background-color: #4361ee;
+    border-color: #3a56e0;
+}
+
+.btn-primary:hover {
+    background-color: #3a56e0;
+    border-color: #334dc9;
+}
+
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.logout-btn {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+    color: #fff;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.logout-btn:hover {
+     color: #ffc107;
+}
+
+main {
+    padding: 2rem 0;
+}
+
+footer {
+    background-color: #343a40;
+    color: #adb5bd;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 991px) {
+    .forum-header h1 {
+        font-size: 1.4rem;
+    }
+}

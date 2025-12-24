@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Редактировать комментарий{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex align-items-center">
+                <i class="bi bi-pencil-square me-2"></i>
+                <h2 class="h5 mb-0">Редактировать комментарий</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Текст комментария -->
+                    <div class="mb-3">
+                        <label for="id_text" class="form-label visually-hidden">
+                            Текст комментария
+                        </label>
+                        <textarea 
+                            name="text" 
+                            class="form-control" 
+                            rows="4" 
+                            placeholder="Введите текст комментария..."
+                            required
+                        >{{ comment.text }}</textarea>
+                    </div>
+
+                    <!-- Прикреплённый файл (если есть) -->
+                    {% if comment.file %}
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-paperclip me-1"></i>Текущий файл
+                        </label>
+                        {% with comment.file.name|lower as filename %}
+                            {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                <div class="mb-2 text-center">
+                                    <img src="{{ comment.file.url }}" 
+                                         class="img-fluid rounded border mb-2"
+                                         alt="Текущее изображение"
+                                         style="max-height: 200px; object-fit: cover;">
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                        <div>
+                            <a href="{{ comment.file.url }}" target="_blank" class="btn btn-sm btn-outline-secondary me-2">
+                                <i class="bi bi-eye me-1"></i>Просмотреть
+                            </a>
+                            <div class="form-check form-switch d-inline-block">
+                                <input class="form-check-input" type="checkbox" id="clear_file" name="clear_file">
+                                <label class="form-check-label small text-muted" for="clear_file">
+                                    Удалить файл
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Замена файла (опционально) -->
+                    <div class="mb-3">
+                        <label for="id_file" class="form-label">
+                            <i class="bi bi-arrow-up-circle me-1"></i>Заменить файл
+                        </label>
+                        <input type="file" name="file" class="form-control" id="id_file">
+                        <div class="form-text text-muted small">
+                            Поддерживаются изображения (jpg, png, gif) и документы.
+                            {% if comment.file %}Оставьте пустым, чтобы сохранить текущий файл.{% endif %}
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-block">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-1"></i>Сохранить изменения
+                        </button>
+                        <a href="{% url 'post_detail' comment.post.id %}" class="btn btn-outline-secondary mt-2 mt-md-0">
+                            <i class="bi bi-arrow-left me-1"></i>Отмена
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
