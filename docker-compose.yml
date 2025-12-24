@@ -1,0 +1,13 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "80:8000"
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3   # монтируем именно файл (не папку!)
+      - ./media:/app/media
+    environment:
+      - PYTHONUNBUFFERED=1
