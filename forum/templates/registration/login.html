@@ -16,7 +16,7 @@
                     {% csrf_token %}
 
                     {% for field in form %}
-                    <div class="mb-3">
+                    <div class="mb-3 d-flex flex-column">
                         {{ field.label_tag|safe }}
                         {{ field|safe }}
                         {% if field.help_text %}
